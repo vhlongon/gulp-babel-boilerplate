@@ -1,0 +1,91 @@
+// -----------------------------------------------------------------------------
+// This file contains all application-wide Sass variables.
+// -----------------------------------------------------------------------------
+
+
+
+
+
+/// Regular font family
+/// @type List
+$text-font-stack: 'Open Sans', 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif !default;
+
+/// Code (monospace) font family
+/// @type List
+$code-font-stack: 'Courier New', 'DejaVu Sans Mono', 'Bitstream Vera Sans Mono', 'Monaco', monospace !default;
+
+
+
+
+
+/// Copy text color
+/// @type Color
+$text-color: #323235 !default;
+
+/// Main brand color
+/// @type Color
+$brand-color: #ff7401 !default;
+
+/// Light grey
+/// @type Color
+$light-grey: #F8F8F8 !default;
+
+/// Medium grey
+/// @type Color
+$mid-grey: #D8D8D8 !default;
+
+/// Dark grey
+/// @type Color
+$dark-grey: #949494 !default;
+
+/// Off-white grey
+/// @type Color
+$off-white: #f8f8f8 !default;
+
+/// white
+/// @type Color
+$white: #fff !default;
+
+/// black
+/// @type Color
+$black: #000 !default;
+
+
+
+
+/// Container's maximum width
+/// Below that is 100%
+/// @type Length
+$max-width: 1200px !default;
+
+
+/// Container's maximum width
+/// Below that is 100%
+/// @type Length
+$grader-max-width: 720px !default;
+
+
+
+
+
+/// Breakpoints map
+/// @prop {String} keys - Keys are identifiers mapped to a given length
+/// @prop {Map} values - Values are actual breakpoints expressed in pixels
+/// @see {mixin} respond-to
+$breakpoints: (
+  'screen-xs': (min-width: 320px),
+  'screen-x': (min-width: 480px),
+  'screen-sm': (min-width: 768px),
+  'screen-l': (min-width: 1024px),
+) !default;
+
+
+
+
+
+
+/// Relative or absolute URL where all assets are served from
+/// @type String
+/// @example scss - When using a CDN
+///   $base-url: 'http://cdn.example.com/assets/';
+$base-url: '/assets/' !default;

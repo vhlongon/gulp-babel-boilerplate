@@ -1,0 +1,576 @@
+/**
+ * The Survey is hosted on Survey Gizmo:
+ * http://www.surveygizmo.com/s3/2329209/Zooma-Online-Grader
+ * We import the Survey in Hubspot with an iFrame, so that
+ * "save & continue" functionality works
+ *
+ *
+ * Bellow are the styles for the survey itself, which we include on
+ * Surveygyzmo: style - custom 
+ * Output: _dist/styles/onlinegrader-styles-gyzmo.css
+ * 
+ */
+
+// -----------------------------------------------------------------------------
+// This file contains very basic styles.
+// -----------------------------------------------------------------------------
+
+@import
+  '../utils/variables',
+  '../utils/functions',
+  '../utils/mixins';
+
+/**
+ * Set up a decent box model on the root element
+ */
+html {
+  box-sizing: border-box;
+}
+
+/**
+ * Make all elements from the DOM inherit from the parent box-sizing
+ * Since `*` has a specificity of 0, it does not override the `html` value
+ * making all elements inheriting from the root box-sizing value
+ * See: https://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/
+ */
+// *, *::before, *::after {
+//   box-sizing: inherit;
+// } 
+
+/**
+ * Basic styles for links
+ */
+a {
+  color: $text-color;
+  text-decoration: none;
+
+  @include on-event {
+    color: $brand-color;
+    text-decoration: none;
+  }
+}
+
+
+// -----------------------------------------------------------------------------
+// Custom styles from Survey Gizmo theme - Online grader.
+// -----------------------------------------------------------------------------
+
+/*********************
+ General Layout
+ *********************/
+
+.sg-survey .sg-body.sg-int-virtual-page .sg-wrapper, .sg-survey .sg-mobile-optimized .sg-wrapper{
+  overflow-x: visible !important;
+}
+
+.sg-body{
+	font-family: $text-font-stack;
+}
+
+.login .sg-page-title{
+  display: inline !important;
+}
+
+.sg-body .sg-page-title{
+  font-size: 22px;
+  display: none;
+
+}
+
+
+/* Styles for Login and thanks pages 
+ Gyzmo adds the custom class (from editing the page) on the body
+*/
+
+
+/*********************
+ HEADER
+ *********************/
+
+.sg-header-image{
+  display: inline-block;
+  width: 200px;
+  top: 30px;
+  position: relative;
+}
+
+.sg-header{
+  padding-left: 70px;
+  padding-right: 70px;  
+  display: none;
+  .sg-title{
+    display: block;
+    padding-top: 0;
+    text-align: center;
+    padding-top: 3px;
+    line-height: 1.4;
+  }
+
+}
+
+
+/*********************
+ CONTENT
+ *********************/
+
+.sg-content{
+  background-color: $off-white !important;
+  .login &, .thank-you & {
+    background-color: $white !important;
+    padding-bottom: 70px;
+  }
+  text-align: center;
+  position: relative;
+  margin: 0 auto !important;
+  padding-top: 30px !important;
+  width: 100% !important;
+  @include respond-to('screen-sm'){
+    max-width: $grader-max-width;
+  }
+}
+
+.sg-question-set{
+
+}
+
+.sg-required-icon{
+  line-height: 0;
+}
+
+.sg-register-link{
+  position: relative !important;
+  // bottom: 0;
+  // top: -30px;
+  // left: 0;
+  // margin: 0 auto !important;
+  // width: 100%;
+}
+
+.sg-instructions{
+  margin: 0 auto !important;
+  // position: absolute;
+  // width: 100%;
+  // bottom: 75px;
+  // overflow: auto !important;
+  // @include respond-to('screen-x'){
+  //   //bottom: -70px;
+  //   position: relative;
+  //   bottom: -167px;
+  // }
+}
+
+.sg-button-bar{
+  @include clearfix();
+  width: 100%;
+  margin: 0 !important;
+  text-align: center;
+  position: relative;
+  padding-bottom: 30px;
+  display: block !important;
+  .login & {
+  top: 20px !important;
+  margin-bottom: 30px !important;
+    @include respond-to('screen-x'){
+      margin-bottom: 0 !important;
+    }
+  }
+  top: 10px;
+  @include respond-to('screen-x'){
+    top: -20px !important;
+  }
+  .sg-button{
+    float: none !important;
+    margin: 0 10px !important;
+    padding: 12.5px 50px;
+    min-height: 40px;
+    border-radius: 0;
+    height: auto !important;
+  }
+  
+}
+
+.sg-question-number{
+	font-weight: bold;
+}
+
+/*********************
+ SYNC BAR
+ *********************/
+.sg-survey .sg-mobile-optimized .sg-toolbar, .sg-survey .sg-toolbar{
+	/* temporarily hide the "save and continue" bar */
+    //display: none;
+}
+
+#sg-snc-bar{
+	 position: absolute;
+    width: 100%;
+    bottom: 0;
+    right: 0;
+}
+/*mobile styles */
+
+.sg-mobile #sg-snc-bar{
+	width: 100%;
+	margin: 0 auto;
+	background: #949494;
+}
+
+.sg-survey .sg-mobile-optimized #sg-snc-bar a {
+	color: $white;
+}
+
+.sg-snc-at-top #sg-snc-trigger, .sg-snc-fixed-at-top #sg-snc-trigger{
+	border-bottom: none;
+}
+
+.sg-survey .sg-mobile-optimized #sg-snc-bar, 
+.sg-survey .sg-mobile-optimized .sg-snc-at-top #sg-snc-box, .sg-survey .sg-mobile-optimized .sg-snc-fixed-at-top #sg-snc-box{
+	background: #949494; 
+}
+
+.sg-snc-at-top #sg-snc-trigger, .sg-snc-fixed-at-top #sg-snc-trigger{
+	border: none;
+}
+
+
+/*********************
+ FOOTER
+ *********************/
+
+ .sg-survey .sg-mobile-optimized .sg-footer, 
+ .sg-survey .sg-body.sg-int-virtual-page .sg-footer,
+ .sg-survey .sg-footer {
+  background: none !important;
+  box-shadow: none !important;
+  padding: 0 0 0 !important;
+  height: auto !important;
+  position: relative !important;
+  
+
+ }
+
+ //make it relative only on the login slide
+  .sg-survey .sg-mobile-optimized.login .sg-footer{
+
+  }
+
+/*********************
+ BUTTONS
+ *********************/
+
+/* remove styles from auto fill */
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill{
+  background-color: transparent !important;
+  -webkit-box-shadow: 0 0 0px 1000px white inset;
+  border: none;
+}
+
+.sg-next-button {
+  color: $white;
+  background: $brand-color;
+  float: none !important;
+  @include respond-to('screen-sm'){
+      float: right;
+    }
+}
+
+input[type="submit"].sg-next-button:hover {
+  color: $white !important;
+  background: darken($brand-color,10%) !important;
+}
+
+input[type="submit"].sg-back-button {
+  color: $black !important;
+  background: $mid-grey !important;
+  float: none !important;
+  border-radius: 0;
+}
+
+input[type="submit"].sg-back-button:hover {
+  //color: $white !important;
+  background: $dark-grey !important;
+}
+
+.sg-submit-button {
+  color: $white !important;
+  background: $brand-color;
+}
+
+.sg-submit-button:hover {
+  color: $white !important;
+  background: $brand-color;
+}
+
+
+
+/*********************
+ INPUT FIELDS
+ *********************/
+
+ .sg-question-options {
+  padding: 20px 0 0 0 !important;
+  border-bottom: none !important;
+}
+
+.sg-question-title {
+  text-align: left;
+  max-width: 600px;
+  position: relative;
+  padding-left: 20px;
+  .sg-question-number{
+    position: absolute;
+    left: 0;
+  }
+}
+
+textarea.sg-input-essay{
+  margin-top: 1rem !important;
+}
+
+.sg-input-text, .sg-input-menu, 
+.sg-input-essay, 
+.sg-question input[type="text"], 
+.sg-question input[type="password"], .sg-question textarea, .sg-question input[type="date"] {
+  border-radius: 0 !important;
+  
+  border: none !important;
+  background-color: $white !important;
+  width: 100%;
+  box-shadow: none !important;
+}
+
+/* Change styles for login inputs */
+.sg-login {
+  padding: 0 10px;
+}
+
+.sg-login .sg-question-options input[type="password"],
+.sg-login .sg-question-options input[type="text"] {
+    max-width: 400px;
+    padding: 0 20px;
+    margin-right: 20px;
+    width: 100%;
+    text-transform: lowercase;
+}
+
+.sg-login .sg-table {
+  width: 100%;
+}
+
+.sg-login .sg-table tr{
+  color: #949494;
+  width: 100%;
+  display: block;
+}
+
+.sg-login .sg-table input{
+  border-bottom: 2px dotted $dark-grey !important;
+}
+
+.sg-login .sg-table td{
+  padding: 0 !important;
+  display: block;
+}
+
+.sg-type-identify tbody th{
+  line-height: 1;
+  display: none !important;
+}
+
+.sg-login .sg-question-options label {
+  max-width: 200px;
+  width: 120px;
+  text-align: left;
+}
+
+.sg-type-radio ul.sg-list-vertical li {
+  padding: 0 0 10px 0 !important;
+}
+
+.sg-type-radio ul.sg-labels-right label, 
+.sg-type-checkbox ul.sg-labels-right label, .sg-type-radio ul.sg-list {
+  font-size: 16px !important;
+}
+
+.sg-type-radio ul.sg-list li{
+  margin-bottom: 0 !important;
+}
+
+/* Override icons styles */
+
+.sg-replace-icons .sg-type-radio ul.sg-labels-right input.sg-input-radio + label:before, .sg-replace-icons .sg-type-checkbox ul.sg-labels-right input.sg-input-checkbox+label:before {
+  padding-left: 1em;
+}
+
+.sg-type-radio ul.sg-labels-right label, .sg-type-checkbox ul.sg-labels-right label {
+    margin-left: 0 !important;
+    width: 100% !important;
+    cursor: pointer !important;
+    background: #fff;
+    padding: 12px 24px 12px 48px !important;
+    color: $dark-grey;
+}
+
+/* mobile styles */
+
+.sg-survey .sg-mobile-optimized .sg-question.sg-type-checkbox .sg-question-options label, .sg-survey .sg-mobile-optimized .sg-question.sg-type-radio .sg-question-options label, .sg-survey .sg-mobile-optimized .sg-question.sg-type-rank-table .sg-question-options td label, .sg-survey .sg-mobile-optimized .sg-question.sg-type-rank-table .sg-question-options th label, .sg-survey .sg-mobile-optimized .sg-type-table-checkbox .sg-question-options label, .sg-survey .sg-mobile-optimized .sg-type-table-matrix .sg-question-options .sg-mobilize-label label, .sg-survey .sg-mobile-optimized .sg-type-table-radio .sg-question-options label {
+  border: none !important;
+  border-radius: 0;
+  background-color: $white;
+  color: $dark-grey;
+}
+
+.sg-survey body.sg-mobile-optimized .sg-question .sg-question-options input[type=radio]:checked + label, 
+.sg-survey body.sg-mobile-optimized .sg-question .sg-question-options input[type=radio]:checked + .sg-mobilize-label label, 
+.sg-survey body.sg-mobile-optimized .sg-question .sg-question-options input[type=checkbox]:checked + .sg-mobilize-label label, 
+.sg-survey body.sg-mobile-optimized .sg-question .sg-question-options input[type=checkbox]:checked+label {
+  background-color: #000;
+  border-color: #f8f8f8 !important;
+}
+
+/* icon */
+.sg-survey .sg-mobile-optimized:not(.sg-rtl) input[type=radio] + label:before, 
+.sg-survey .sg-mobile-optimized:not(.sg-rtl) input[type=radio] + .sg-mobilize-label label:before, 
+.sg-survey .sg-mobile-optimized.sg-rtl input[type=radio] + label:after, 
+.sg-survey .sg-mobile-optimized.sg-rtl input[type=radio] + .sg-mobilize-label label:after {
+  color: #949494;
+}
+
+.sg-survey .sg-mobile-optimized:not(.sg-rtl) input[type=radio]:checked + label:before, 
+.sg-survey .sg-mobile-optimized:not(.sg-rtl) input[type=radio]:checked + .sg-mobilize-label label:before, 
+.sg-survey .sg-mobile-optimized.sg-rtl input[type=radio]:checked + label:after, 
+.sg-survey .sg-mobile-optimized.sg-rtl input[type=radio]:checked + .sg-mobilize-label label:after {
+  color: $dark-grey !important;
+}
+
+/*********************
+ PROGRESS BAR
+ *********************/
+ 
+ /* hide bar on login page*/
+.login .sg-progress-bar {
+ 	display: none;
+ }
+
+.sg-progress-bar {
+	margin: -50px  auto 0 auto !important;
+  display: block;
+  width: 100% !important;
+  max-width: 200px;
+  left: 0 !important;
+  position: relative !important;
+  @include respond-to('screen-sm'){
+    margin: -40px  auto 0 auto !important;
+  }
+}
+
+.sg-progress-bar-text {
+    color: $black !important;
+    background-color: transparent !important;
+    font-size: 12px !important;
+    display: block !important;
+    clear: both;
+    position: relative !important;
+    top: 40px;
+    width: 100% !important;
+}
+
+.sg-progress-bar-background {
+	background-color: $mid-grey !important;
+	border-radius: 10px !important;
+	width: 100% !important;
+	border: none !important;
+	display: block !important;
+    clear: both !important;
+    float: none !important;
+    height: 15px;
+}
+
+.thank-you .sg-progress-bar-inner {
+  background-color: $brand-color !important;
+  border-radius: 10px !important;
+} 
+
+.sg-progress-bar-inner {
+	background-color: $black !important;
+	border-radius: 10px 0 0 10px !important;
+   height: 15px !important;
+}    
+
+
+/*mobile styles */
+
+.sg-survey .sg-mobile-optimized .sg-progress-bar, 
+.sg-survey .sg-body.sg-int-virtual-page .sg-progress-bar {
+	top: 10px;
+}
+
+.sg-survey .sg-mobile-optimized .sg-progress-bar-background, 
+.sg-survey .sg-body.sg-int-virtual-page .sg-progress-bar-background {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.sg-survey .sg-mobile-optimized.login .sg-question .sg-question-options table[class^="sg-"] tr th, .sg-survey .sg-mobile-optimized.login .sg-question .sg-question-options table[class^="sg-"] tr td{
+	text-align: center;
+}
+
+/*************************
+ error display styles
+ ************************/
+
+ .sg-error-display {
+ 	display: none !important;
+ }
+
+.sg-question-errorlist {
+	padding: 1.5em 1.5em 1.2em 1.5em !important;
+}
+
+.sg-error-message, .sg-question-errorlist {
+	background: $brand-color !important;
+	color: $white !important;
+	border: 2px solid $brand-color !important;
+	border-radius: 0 !important;
+	text-align: center;
+}
+
+.sg-question-has-errors {
+	border-radius: 0 !important;
+	border: 2px solid $brand-color !important;
+}
+
+/*************************
+ Media queries declaration
+ ************************/
+ 
+@media (max-width: 768px) {
+
+	.sg-header{
+	  padding-left: 20px;
+	  padding-right: 20px;  
+    max-width: 260px;
+	}
+
+	.sg-header-image {
+	    margin: 0 !important;
+      width: 100%;
+	}
+
+  	.sg-body h1.sg-title{
+  		padding-bottom: 20px;
+      text-align: left;
+      width: 225px;
+
+  	}
+  	.sg-body h1.sg-title span{
+  		margin-top: 45px;
+    	display: block;
+
+  	}
+  	.sg-content, .sg-survey .sg-mobile-optimized.login .sg-content{
+	    //border: 10px solid #F8F8F8;
+  	}
+
+  
+}
