@@ -47,20 +47,29 @@ gulp.task('images-deploy', function() {
         .pipe(gulp.dest('dist/images'));
 });
 
+
+//transpile our es2015 files to compliant javascript
+gulp.task('babel', function() {
+  return gulp.src('app/scripts/src/_project/*.js')
+        .pipe(babel({
+            presets: ['es2015']
+        }))
+        .pipe(concat('main.js'))
+        //catch errors
+         .on('error', gutil.log)
+        .pipe(gulp.dest('app/scripts'));
+});
+
 //compiling our Javascripts
-gulp.task('scripts', function() {
+gulp.task('scripts', ['babel'], function() {
     //this is where our dev JS scripts are
-    return gulp.src(['app/scripts/src/_includes/**/*.js', 'app/scripts/src/**/*.js'])
+    return gulp.src(['app/scripts/src/_includes/**/*.js', 'app/scripts/src/**/*.js', 'app/scripts/src/*.js'])
                .pipe(sourceMaps.init())
-               // transpile ES2015 to ES05
-               .pipe(babel({
-                   presets: ['es2015']
-               }))
                 //this is the filename of the compressed version of our JS
                .pipe(concat('app.js'))
                //catch errors
                .on('error', gutil.log)
-               //compress :D
+               //write source maps
                .pipe(sourceMaps.write())
                //where we will store our finalized, compressed script
                .pipe(gulp.dest('app/scripts'))

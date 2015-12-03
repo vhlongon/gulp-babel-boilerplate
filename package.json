@@ -1,7 +1,7 @@
 {
-  "name": "project_name",
+  "name": "gulp_babel_boilerplate",
   "version": "0.0.1",
-  "description": "Description of your project",
+  "description": "A simple gyulp boilerplate with Babel",
   "dependencies": {},
   "devDependencies": {
     "babel-preset-es2015": "^6.1.18",
