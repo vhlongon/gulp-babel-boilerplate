@@ -2,21 +2,19 @@
  *  project
  *  @version 0.1
  *  @author victorlongon.com
- *  @copyright victor longon 2015
+ *  @copyright victor longon 2015 
  */
-
+import * as test from 'test';
 var obj = window.obj || {};
 obj.main = (function main() {
   'use strict';
 
   function _init() {
-    //simple destructuring test
-    let key = 'z';
-    let { [key]: foo } = { z: 'bar' };
-
-    console.log(foo); // "bar"
+    console.log(test.exportVar); // "hej"
   }
-  _init();
+  return { 
+    init: _init,
+  };
 }());
 
 
@@ -26,3 +24,4 @@ obj.main = (function main() {
     obj.main.init();
   });
 })(jQuery);
+ 
