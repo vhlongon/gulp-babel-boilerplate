@@ -1,5 +1,5 @@
 //initialize all of our variables
-var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, browserSync, autoprefixer, gulpSequence, shell, sourceMaps, cssnext, rename, babel;
+var app, base, concat, directory, gulp, gutil, hostname, path, refresh, sass, uglify, imagemin, minifyCSS, del, browserSync, autoprefixer, gulpSequence, shell, sourceMaps, cssnext, rename, plumber, babel;
 
 var autoPrefixBrowserList = ['last 2 version', 'safari 5', 'ie 8', 'ie 9', 'opera 12.1', 'ios 6', 'android 4'];
 
@@ -19,6 +19,7 @@ gulpSequence  = require('gulp-sequence').use(gulp);
 shell         = require('gulp-shell');
 cssnext       = require('gulp-cssnext');
 rename        = require('gulp-rename');
+plumber     = require('gulp-plumber');
 babel         = require('gulp-babel');
 
 gulp.task('browserSync', function() {
@@ -63,34 +64,34 @@ gulp.task('babel', function() {
 //compiling our Javascripts
 gulp.task('scripts', ['babel'], function() {
     //this is where our dev JS scripts are
-    return gulp.src(['app/scripts/src/_includes/**/*.js', 'app/scripts/src/**/*.js', 'app/scripts/src/*.js'])
-               .pipe(sourceMaps.init())
+    return gulp.src(['app/scripts/src/_includes/**/*.js', 'app/scripts/src/_project/*.js', 'app/scripts/src/**/*.js'])
+                //prevent pipe breaking caused by errors from gulp plugins
+                .pipe(plumber())
+                .pipe(sourceMaps.init())
                 //this is the filename of the compressed version of our JS
-               .pipe(concat('app.js'))
-               //catch errors
-               .on('error', gutil.log)
-               //write source maps
-               .pipe(sourceMaps.write())
-               //where we will store our finalized, compressed script
-               .pipe(gulp.dest('app/scripts'))
-               //notify browserSync to refresh
-               .pipe(browserSync.reload({stream: true}));
+                .pipe(concat('app.js'))
+                //catch errors
+                .on('error', gutil.log)
+                //write source maps
+                .pipe(sourceMaps.write())
+                //where we will store our finalized, compressed script
+                .pipe(gulp.dest('app/scripts'))
+                //notify browserSync to refresh
+                .pipe(browserSync.reload({stream: true}));
 });
 
-//compiling our Javascripts for deployment
-gulp.task('scripts-deploy', function() {
+//compiling our Javascripts for deployment-ready
+gulp.task('scripts-deploy', ['babel'], function() {
     //this is where our dev JS scripts are
-    return gulp.src(['app/scripts/src/_includes/**/*.js', 'app/scripts/src/**/*.js'])
-                // transpile ES2015 to ES05
-                .pipe(babel({
-                    presets: ['es2015']
-                }))
+    return gulp.src(['app/scripts/src/_includes/**/*.js', 'app/scripts/src/_project/*.js', 'app/scripts/src/**/*.js'])
+                //prevent pipe breaking caused by errors from gulp plugins
+                .pipe(plumber())
                 //this is the filename of the compressed version of our JS
-               .pipe(concat('app.js'))
-               //compress :D
-               .pipe(uglify())
-               //where we will store our finalized, compressed script
-               .pipe(gulp.dest('dist/scripts'));
+                .pipe(concat('app.js'))
+                //compress :D
+                .pipe(uglify())
+                //where we will store our finalized, compressed script
+                .pipe(gulp.dest('dist/scripts'));
 });
 
 //compiling our SCSS files

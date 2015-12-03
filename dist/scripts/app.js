@@ -1,2 +1,0 @@
-var ZM=window.ZM||{};ZM.grader=function(){"use strict";function r(){$("#sgE-2329209-1-7-10011").attr("placeholder","Email Address*"),$("#sgE-2329209-1-7-10012").attr("placeholder","Password*"),$("#sgE-2329209-1-7-10011").on("blur",function(r){var t=$(this).val().toLowerCase();$(this).val(t)})}return{init:r}}(),function(r){r(function(){ZM.grader.init()})}(jQuery);
-//# sourceMappingURL=app.js.map
