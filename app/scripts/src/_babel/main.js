@@ -4,17 +4,16 @@
  *  @author victorlongon.com
  *  @copyright victor longon 2015 
  */
-import * as test from 'test';
+
+import test from 'test';
+    
 var obj = window.obj || {};
 obj.main = (function main() {
-  'use strict';
-
-  function _init() {
-    console.log(test.exportVar); // "hej"
+  function init() {
+    console.log('_init');
+    myFunc();
   }
-  return { 
-    init: _init,
-  };
+  return { init };
 }());
 
 
